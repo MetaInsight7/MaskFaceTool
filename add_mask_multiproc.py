@@ -10,7 +10,7 @@ from tqdm import trange
 
 from api_usage.face_detect import FaceDet
 from api_usage.face_alignment import FaceAlign
-from face_masker import FaceMasker
+from api_usage.face_masker import FaceMasker
 
 def separate_database(input_folder, num_cores):
     List_imgs = os.listdir(input_folder)
@@ -86,6 +86,7 @@ def generate_mask(input_folder, output_folder, List_imgs, ratio, speed):
             face_masker.add_mask_one(file_path, face_lms[0], mask_template_name, save_dir, speed) # masked one face
 
         for file in images_path_list[pct:]:
+            file_path = os.path.join(images_path, file)
             save_dir = os.path.join(output_subfolder, file)
             shutil.copyfile(file_path, save_dir)  # Copy the image without adding a mask
 
